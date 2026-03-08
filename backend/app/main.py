@@ -14,6 +14,9 @@ from app.api.weekly_report import router as weekly_report_router
 from app.api.seed import router as seed_router
 from app.api.segments import router as segments_router
 from app.api.at_risk import router as at_risk_router
+from app.api.anomalies import router as anomalies_router
+from app.api.demand import router as demand_router
+from app.api.recommendations import router as recommendations_router
 
 app = FastAPI(
     title="AI Founder Dashboard API",
@@ -42,6 +45,9 @@ app.include_router(weekly_report_router)
 app.include_router(seed_router)
 app.include_router(segments_router)
 app.include_router(at_risk_router)
+app.include_router(anomalies_router)
+app.include_router(demand_router)
+app.include_router(recommendations_router)
 
 
 ALLOWED_ORIGINS = {"http://localhost:3000", "http://127.0.0.1:3000"}

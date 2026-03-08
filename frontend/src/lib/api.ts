@@ -228,6 +228,48 @@ export const reportApi = {
     apiFetch<{ report: string; format: string; generated_at: string }>("/weekly-report", { method: "POST" }),
 };
 
+// Recommendations (also bought)
+export const recommendationsApi = {
+  list: (minCustomers = 2) =>
+    apiFetch<{
+      recommendations: {
+        product: string;
+        also_bought: { product: string; strength: number }[];
+      }[];
+    }>("/recommendations?min_customers=" + minCustomers),
+};
+
+// Demand (per-product forecast)
+export const demandApi = {
+  list: (days = 30, product?: string) => {
+    const params = new URLSearchParams();
+    params.set("days", String(days));
+    if (product) params.set("product", product);
+    return apiFetch<{
+      products: {
+        product: string;
+        historical: { date: string; quantity: number }[];
+        predicted: { date: string; predicted_quantity: number }[];
+        message?: string;
+      }[];
+    }>("/demand?" + params.toString());
+  },
+};
+
+// Anomalies
+export const anomaliesApi = {
+  list: (days = 30) =>
+    apiFetch<{
+      anomalies: {
+        date: string;
+        type: "revenue" | "orders";
+        actual: number;
+        expected: number;
+        deviation_pct: number;
+      }[];
+    }>("/anomalies?days=" + days),
+};
+
 // At-Risk (Churn)
 export const atRiskApi = {
   list: (days = 60) =>

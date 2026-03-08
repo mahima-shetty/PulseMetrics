@@ -11,6 +11,9 @@ import {
   LogOut,
   PieChart,
   AlertTriangle,
+  Activity,
+  BarChart3,
+  Repeat,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -23,6 +26,9 @@ const nav = [
   { href: "/predictions", label: "PREDICTIONS", icon: TrendingUp },
   { href: "/segments", label: "SEGMENTS", icon: PieChart },
   { href: "/at-risk", label: "AT-RISK", icon: AlertTriangle },
+  { href: "/anomalies", label: "ANOMALIES", icon: Activity },
+  { href: "/demand", label: "DEMAND", icon: BarChart3 },
+  { href: "/recommendations", label: "RECOMMENDATIONS", icon: Repeat },
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 

@@ -1,0 +1,5 @@
+# Railway config for backend service (PulseMetrics)
+# Use this when deploying backend from repo root
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"

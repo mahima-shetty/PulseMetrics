@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 180 100% 97%;
+    --card: 240 12% 6%;
+    --card-foreground: 180 100% 97%;
+    --popover: 240 12% 6%;
+    --popover-foreground: 180 100% 97%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 240 10% 4%;
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 240 10% 4%;
+    --muted: 240 10% 12%;
+    --muted-foreground: 180 20% 60%;
+    --accent: 270 100% 60%;
+    --accent-foreground: 180 100% 97%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 180 100% 97%;
+    --border: 180 50% 20%;
+    --input: 180 30% 15%;
+    --ring: 180 100% 50%;
+    --radius: 0.5rem;
+    --neon-cyan: 180 100% 50%;
+    --neon-magenta: 300 100% 50%;
+    --neon-purple: 270 100% 60%;
+    --chart-1: 180 100% 50%;
+    --chart-2: 300 100% 60%;
+    --chart-3: 270 100% 65%;
+    --chart-4: 180 80% 45%;
+    --chart-5: 300 80% 55%;
+  }
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 180 100% 97%;
+    --card: 240 12% 6%;
+    --card-foreground: 180 100% 97%;
+    --popover: 240 12% 6%;
+    --popover-foreground: 180 100% 97%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 240 10% 4%;
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 240 10% 4%;
+    --muted: 240 10% 12%;
+    --muted-foreground: 180 20% 60%;
+    --accent: 270 100% 60%;
+    --accent-foreground: 180 100% 97%;
+    --destructive: 0 84% 60%;
+    --border: 180 50% 15%;
+    --input: 180 30% 12%;
+    --ring: 180 100% 50%;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  h1, h2, h3, .font-display {
+    font-family: 'Orbitron', sans-serif;
+  }
+  .font-mono, [data-value] {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .neon-glow-cyan {
+    box-shadow: 0 0 10px hsl(180 100% 50% / 0.3), 0 0 20px hsl(180 100% 50% / 0.2), 0 0 40px hsl(180 100% 50% / 0.1);
+  }
+  .neon-glow-magenta {
+    box-shadow: 0 0 10px hsl(300 100% 50% / 0.3), 0 0 20px hsl(300 100% 50% / 0.2), 0 0 40px hsl(300 100% 50% / 0.1);
+  }
+  .neon-border-cyan {
+    border-color: hsl(180 100% 50% / 0.5);
+    box-shadow: 0 0 15px hsl(180 100% 50% / 0.2), inset 0 0 15px hsl(180 100% 50% / 0.05);
+  }
+  .neon-text-cyan {
+    color: hsl(180 100% 50%);
+    text-shadow: 0 0 10px hsl(180 100% 50% / 0.5), 0 0 20px hsl(180 100% 50% / 0.3);
+  }
+  .neon-text-magenta {
+    color: hsl(300 100% 60%);
+    text-shadow: 0 0 10px hsl(300 100% 60% / 0.5), 0 0 20px hsl(300 100% 60% / 0.3);
+  }
+  .hud-panel {
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    border: 1px solid hsl(180 100% 50% / 0.3);
+  }
+  .hud-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: hsl(180 100% 50% / 0.6);
+    border-style: solid;
+    border-width: 0;
+  }
+  .hud-corner-tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+  .hud-corner-tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+  .hud-corner-bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+  .hud-corner-br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+}

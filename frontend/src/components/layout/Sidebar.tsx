@@ -14,6 +14,7 @@ import {
   Activity,
   BarChart3,
   Repeat,
+  Banknote,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,7 @@ const nav = [
   { href: "/anomalies", label: "ANOMALIES", icon: Activity },
   { href: "/demand", label: "DEMAND", icon: BarChart3 },
   { href: "/recommendations", label: "RECOMMENDATIONS", icon: Repeat },
+  { href: "/ltv", label: "LTV", icon: Banknote },
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 

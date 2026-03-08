@@ -228,6 +228,22 @@ export const reportApi = {
     apiFetch<{ report: string; format: string; generated_at: string }>("/weekly-report", { method: "POST" }),
 };
 
+// LTV (Lifetime Value)
+export const ltvApi = {
+  list: (limit = 50) =>
+    apiFetch<{
+      customers: {
+        id: string;
+        name: string;
+        email: string;
+        historical_ltv: number;
+        order_count: number;
+        predicted_ltv_6m: number;
+        predicted_ltv_12m: number;
+      }[];
+    }>("/ltv?limit=" + limit),
+};
+
 // Recommendations (also bought)
 export const recommendationsApi = {
   list: (minCustomers = 2) =>

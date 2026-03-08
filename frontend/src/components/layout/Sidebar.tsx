@@ -10,6 +10,7 @@ import {
   TrendingUp,
   LogOut,
   PieChart,
+  AlertTriangle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ const nav = [
   { href: "/orders", label: "ORDERS", icon: ShoppingCart },
   { href: "/predictions", label: "PREDICTIONS", icon: TrendingUp },
   { href: "/segments", label: "SEGMENTS", icon: PieChart },
+  { href: "/at-risk", label: "AT-RISK", icon: AlertTriangle },
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 

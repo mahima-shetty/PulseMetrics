@@ -13,6 +13,7 @@ from app.api.ai_insights import router as ai_insights_router
 from app.api.weekly_report import router as weekly_report_router
 from app.api.seed import router as seed_router
 from app.api.segments import router as segments_router
+from app.api.at_risk import router as at_risk_router
 
 app = FastAPI(
     title="AI Founder Dashboard API",
@@ -40,6 +41,7 @@ app.include_router(ai_insights_router)
 app.include_router(weekly_report_router)
 app.include_router(seed_router)
 app.include_router(segments_router)
+app.include_router(at_risk_router)
 
 
 ALLOWED_ORIGINS = {"http://localhost:3000", "http://127.0.0.1:3000"}

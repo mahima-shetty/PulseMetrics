@@ -42,7 +42,7 @@ PRODUCTS = [
 def seed_demo_data(db: Session, user_id: UUID) -> dict:
     """Create sample customers and orders for demo. Returns counts."""
     now = datetime.utcnow()
-    start_date = now - timedelta(days=60)
+    start_date = now - timedelta(days=120)  # 120 days ago so some orders are 60+ days old (for at-risk demo)
 
     existing_emails = {c.email for c in db.query(Customer).filter(Customer.user_id == user_id).all()}
     customers_to_create = [c for c in CUSTOMERS if c["email"] not in existing_emails]
@@ -84,7 +84,7 @@ def seed_demo_data(db: Session, user_id: UUID) -> dict:
         price = random.uniform(*product_info["price_range"])
         price = round(price, 2)
         quantity = random.randint(1, 3)
-        days_ago = random.randint(0, 60)
+        days_ago = random.randint(0, 120)
         purchase_date = start_date + timedelta(days=days_ago)
         purchase_date = purchase_date.replace(hour=random.randint(9, 17), minute=random.randint(0, 59), second=0, microsecond=0)
 

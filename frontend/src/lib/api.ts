@@ -228,6 +228,24 @@ export const reportApi = {
     apiFetch<{ report: string; format: string; generated_at: string }>("/weekly-report", { method: "POST" }),
 };
 
+// At-Risk (Churn)
+export const atRiskApi = {
+  list: (days = 60) =>
+    apiFetch<{
+      customers: {
+        id: string;
+        name: string;
+        email: string;
+        days_since_order: number;
+        last_purchase_date: string | null;
+        order_count: number;
+        total_purchases: number;
+        score: number;
+        reason: string;
+      }[];
+    }>("/at-risk?days=" + days),
+};
+
 // Segments (RFM + K-means)
 export const segmentsApi = {
   list: () =>

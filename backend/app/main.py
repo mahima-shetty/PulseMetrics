@@ -18,6 +18,7 @@ from app.api.anomalies import router as anomalies_router
 from app.api.demand import router as demand_router
 from app.api.recommendations import router as recommendations_router
 from app.api.ltv import router as ltv_router
+from app.api.alerts import router as alerts_router
 
 app = FastAPI(
     title="AI Founder Dashboard API",
@@ -50,6 +51,7 @@ app.include_router(anomalies_router)
 app.include_router(demand_router)
 app.include_router(recommendations_router)
 app.include_router(ltv_router)
+app.include_router(alerts_router)
 
 
 ALLOWED_ORIGINS = {"http://localhost:3000", "http://127.0.0.1:3000"}

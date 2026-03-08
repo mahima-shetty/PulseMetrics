@@ -228,6 +228,20 @@ export const reportApi = {
     apiFetch<{ report: string; format: string; generated_at: string }>("/weekly-report", { method: "POST" }),
 };
 
+// Smart Alerts
+export const alertsApi = {
+  list: (revenueDropPct = 30, inactiveDays = 60) =>
+    apiFetch<{
+      alerts: {
+        id: string;
+        type: string;
+        message: string;
+        severity: "high" | "medium";
+        data: Record<string, unknown>;
+      }[];
+    }>("/alerts?revenue_drop_pct=" + revenueDropPct + "&inactive_days=" + inactiveDays),
+};
+
 // LTV (Lifetime Value)
 export const ltvApi = {
   list: (limit = 50) =>

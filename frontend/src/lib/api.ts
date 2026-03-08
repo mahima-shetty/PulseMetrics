@@ -228,6 +228,18 @@ export const reportApi = {
     apiFetch<{ report: string; format: string; generated_at: string }>("/weekly-report", { method: "POST" }),
 };
 
+// Segments (RFM + K-means)
+export const segmentsApi = {
+  list: () =>
+    apiFetch<{
+      segments: {
+        name: string;
+        customer_count: number;
+        customers: { id: string; name: string; email: string; recency: number; frequency: number; monetary: number }[];
+      }[];
+    }>("/segments"),
+};
+
 // Seed
 export const seedApi = {
   demoData: () =>

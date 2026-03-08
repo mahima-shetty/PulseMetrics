@@ -9,6 +9,7 @@ import {
   Sparkles,
   TrendingUp,
   LogOut,
+  PieChart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ const nav = [
   { href: "/customers", label: "CUSTOMERS", icon: Users },
   { href: "/orders", label: "ORDERS", icon: ShoppingCart },
   { href: "/predictions", label: "PREDICTIONS", icon: TrendingUp },
+  { href: "/segments", label: "SEGMENTS", icon: PieChart },
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 

@@ -96,7 +96,7 @@ export default function DemandPage() {
             Demand Forecast
           </h1>
           <p className="mt-1 font-mono text-xs text-muted-foreground">
-            Per-product quantity forecast (Ridge regression)
+            Expected units sold per product — plan inventory and restock
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -171,7 +171,7 @@ export default function DemandPage() {
             <div className="hud-corner hud-corner-tl" />
             <div className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary/80">
               <Package className="h-4 w-4" />
-              Quantity Forecast
+              Units sold — actual vs predicted
             </div>
             {chartData.length > 0 ? (
               <ResponsiveContainer width="100%" height={320}>

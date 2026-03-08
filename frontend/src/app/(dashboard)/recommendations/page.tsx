@@ -57,12 +57,12 @@ export default function RecommendationsPage() {
             Recommendations
           </h1>
           <p className="mt-1 font-mono text-xs text-muted-foreground">
-            Customers who bought X also bought Y
+            Product bundles — what customers buy together
           </p>
         </div>
         <div className="flex flex-col gap-1">
           <span className="font-mono text-xs text-muted-foreground">
-            Min. customers who bought both:
+            Show pairs bought by at least:
           </span>
           <div className="flex items-center gap-2">
             {[1, 2, 3, 5].map((n) => (
@@ -89,7 +89,7 @@ export default function RecommendationsPage() {
       )}
 
       <div className="rounded-none border border-primary/20 bg-primary/5 p-4 font-mono text-xs text-muted-foreground">
-        <strong className="text-primary">How it works:</strong> For each product, we show other products bought by the same customers. The filter above sets the minimum number of customers who must have bought both products for a pair to appear.
+        <strong className="text-primary">How it works:</strong> For each product, we show what else customers bought. Use this for cross-sell (e.g. &quot;Customers who bought X also bought Y&quot;). Raise the filter to show only strong patterns.
       </div>
 
       {data?.recommendations?.length === 0 ? (
@@ -99,7 +99,7 @@ export default function RecommendationsPage() {
             <Repeat className="h-12 w-12 text-primary/50" />
             <p className="font-medium">No recommendations found.</p>
             <p className="max-w-md text-center text-xs">
-              Try a lower threshold (1+). Or add more orders so customers buy multiple products.
+              Try &quot;1+&quot; or add more orders so customers buy multiple products.
             </p>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function RecommendationsPage() {
                 {rec.product}
               </div>
               <div className="space-y-2 font-mono text-sm">
-                <span className="text-muted-foreground">Customers also bought:</span>
+                <span className="text-muted-foreground">Often bought with:</span>
                 <ul className="space-y-1.5">
                   {rec.also_bought.map((ab) => (
                     <li

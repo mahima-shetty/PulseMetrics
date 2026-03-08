@@ -62,7 +62,7 @@ export default function SegmentsPage() {
           Customer Segments
         </h1>
         <p className="mt-1 font-mono text-xs text-muted-foreground">
-          RFM analysis + K-means clustering
+          Group customers by recency, frequency, and spend — Champions, Loyal, At-Risk, Lost
         </p>
       </header>
 
@@ -82,10 +82,13 @@ export default function SegmentsPage() {
           {pieData.length > 0 && (
             <div className="relative overflow-hidden rounded-none border border-primary/20 bg-card/30 p-6 hud-panel">
               <div className="hud-corner hud-corner-tl" />
-              <div className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary/80">
+              <div className="mb-2 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary/80">
                 <PieChart className="h-4 w-4" />
-                Segment Distribution
+                Segment distribution
               </div>
+              <p className="mb-4 font-mono text-xs text-muted-foreground">
+                Champions = best customers · Loyal = regular buyers · At-Risk = slipping · Lost = inactive
+              </p>
               <ResponsiveContainer width="100%" height={240}>
                 <RechartsPie>
                   <Pie
@@ -169,9 +172,9 @@ export default function SegmentsPage() {
                       <tr className="border-b border-primary/20 text-left text-muted-foreground">
                         <th className="py-2 pr-4">Name</th>
                         <th className="py-2 pr-4">Email</th>
-                        <th className="py-2 pr-4 text-right">Recency (days)</th>
-                        <th className="py-2 pr-4 text-right">Frequency</th>
-                        <th className="py-2 pr-4 text-right">Monetary</th>
+                        <th className="py-2 pr-4 text-right" title="Days since last order">Days since order</th>
+                        <th className="py-2 pr-4 text-right" title="Number of orders">Orders</th>
+                        <th className="py-2 pr-4 text-right" title="Total amount spent">Total spend</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -183,7 +186,7 @@ export default function SegmentsPage() {
                             </Link>
                           </td>
                           <td className="py-2 pr-4 text-muted-foreground">{c.email}</td>
-                          <td className="py-2 pr-4 text-right tabular-nums">{c.recency}</td>
+                          <td className="py-2 pr-4 text-right tabular-nums">{c.recency}d</td>
                           <td className="py-2 pr-4 text-right tabular-nums">{c.frequency}</td>
                           <td className="py-2 pr-4 text-right tabular-nums">
                             ${c.monetary.toLocaleString(undefined, { maximumFractionDigits: 0 })}

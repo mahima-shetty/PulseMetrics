@@ -64,7 +64,7 @@ export default function LTVPage() {
         <header className="border-b border-primary/20 pb-6">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary/60">ML Module</p>
           <h1 className="font-display mt-1 text-3xl font-bold tracking-tight text-primary">
-            LTV Prediction
+            Lifetime Value (LTV)
           </h1>
         </header>
         <div className="flex h-64 items-center justify-center font-mono text-muted-foreground">
@@ -79,10 +79,10 @@ export default function LTVPage() {
       <header className="border-b border-primary/20 pb-6">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary/60">ML Module</p>
         <h1 className="font-display mt-1 text-3xl font-bold tracking-tight text-primary">
-          LTV Prediction
-        </h1>
+            Lifetime Value (LTV)
+          </h1>
         <p className="mt-1 font-mono text-xs text-muted-foreground">
-          Customer lifetime value — historical spend extrapolated to 6m and 12m
+          Predicted spend per customer over next 6 and 12 months — use for marketing budget
         </p>
       </header>
 

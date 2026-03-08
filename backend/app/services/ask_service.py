@@ -267,6 +267,6 @@ def ask_question(db, user_id, question: str, llm_func=None) -> dict:
             answer = f"Found {len(anomalies_list)} anomal{'y' if len(anomalies_list) == 1 else 'ies'} in the last {days} days (significant drops vs rolling average)."
 
     else:
-        answer = "I couldn't understand that. Try: 'What's my total revenue?', 'Top 5 products', 'Revenue last 30 days', 'Recent orders', 'Customer segments', 'At-risk customers', 'Alerts'."
+        answer = "I didn't catch that. Try: \"What's my total revenue?\", \"Top 5 products\", \"List orders\", or \"Customer segments\"."
 
     return {"answer": answer, "data": data, "chart_type": intent if "chart" in intent else None}

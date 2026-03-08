@@ -71,7 +71,7 @@ export default function AlertsPage() {
           Smart Alerts
         </h1>
         <p className="mt-1 font-mono text-xs text-muted-foreground">
-          Revenue drop, inactive high-value customers, order trends
+          Automatic alerts when revenue drops, top customers go quiet, or orders decline
         </p>
       </header>
 
@@ -82,7 +82,7 @@ export default function AlertsPage() {
       )}
 
       <div className="rounded-none border border-primary/20 bg-primary/5 p-4 font-mono text-xs text-muted-foreground">
-        <strong className="text-primary">Rules:</strong> (1) Revenue down &gt;30% vs last week (2) High-value customers inactive &gt;60 days (3) Orders down &gt;30% vs prior 7 days
+        <strong className="text-primary">What we watch:</strong> (1) Revenue down vs last week (2) Big spenders with no orders in 60+ days (3) Order count down vs last week
       </div>
 
       {data?.alerts?.length === 0 ? (

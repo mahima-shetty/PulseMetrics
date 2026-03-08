@@ -176,7 +176,7 @@ export default function DashboardPage() {
             disabled={seedLoading}
             className="font-mono text-xs"
           >
-            {seedLoading ? "..." : "[Load demo data]"}
+            {seedLoading ? "..." : "Add sample data"}
           </Button>
         </div>
       </header>

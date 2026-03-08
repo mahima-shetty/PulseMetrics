@@ -60,7 +60,7 @@ export default function AnomaliesPage() {
             Anomaly Detection
           </h1>
           <p className="mt-1 font-mono text-xs text-muted-foreground">
-            Revenue & order drops vs 7-day rolling baseline
+            Unusual drops in revenue or orders — investigate these dates
           </p>
         </div>
         <div className="flex items-center gap-2">

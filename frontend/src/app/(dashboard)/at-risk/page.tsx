@@ -65,11 +65,11 @@ export default function AtRiskPage() {
             At-Risk Customers
           </h1>
           <p className="mt-1 font-mono text-xs text-muted-foreground">
-            Churn scoring • inactive beyond threshold
+            Customers with no orders recently — reach out before they leave
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-xs text-muted-foreground">Inactive threshold:</span>
+          <span className="font-mono text-xs text-muted-foreground">No orders in last:</span>
           {[30, 60, 90].map((d) => (
             <button
               key={d}
@@ -98,7 +98,7 @@ export default function AtRiskPage() {
             <p>No at-risk customers found.</p>
             <p className="text-xs">All customers have ordered within the last {days} days.</p>
             <p className="mt-2 max-w-md text-center text-xs">
-              Try a lower threshold (30d) or re-run Load Demo Data from the dashboard to generate orders spanning 120 days.
+              Try 30 days, or load sample data from the dashboard if you have little data.
             </p>
           </div>
         </div>
@@ -115,8 +115,8 @@ export default function AtRiskPage() {
                 <tr className="border-b border-primary/20 text-left text-muted-foreground">
                   <th className="py-2 pr-4">Name</th>
                   <th className="py-2 pr-4">Email</th>
-                  <th className="py-2 pr-4 text-right">Risk</th>
-                  <th className="py-2 pr-4 text-right">Days Inactive</th>
+                  <th className="py-2 pr-4 text-right" title="0–100, higher = more likely to churn">Risk</th>
+                  <th className="py-2 pr-4 text-right">Days since order</th>
                   <th className="py-2 pr-4 text-right">Last Order</th>
                   <th className="py-2 pr-4 text-right">Total Spend</th>
                   <th className="py-2 pr-4 max-w-[200px]">Reason</th>

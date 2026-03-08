@@ -18,5 +18,6 @@ ENV PYTHONPATH=/app
 ENV PORT=8000
 EXPOSE 8000
 
-# Run migrations then start server. Use $PORT for Railway (falls back to 8000)
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Use startup script for clearer logs
+RUN chmod +x start.sh
+CMD ["./start.sh"]

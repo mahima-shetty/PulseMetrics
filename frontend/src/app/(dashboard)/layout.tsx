@@ -3,7 +3,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { MobileNavProvider } from "@/contexts/MobileNavContext";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { MobileHeader } from "@/components/layout/MobileHeader";
+
 export default function DashboardLayout({
   children,
 }: {
@@ -29,13 +32,15 @@ export default function DashboardLayout({
   if (!user) return null;
 
   return (
-    <div className="min-h-screen">
-      <Sidebar />
-      <main className="pl-56">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-end border-b border-primary/20 bg-background/95 px-6 backdrop-blur shadow-[0_0_30px_hsl(180_100%_50%_/_0.04)]">
-        </header>
-        <div className="p-6">{children}</div>
-      </main>
-    </div>
+    <MobileNavProvider>
+      <div className="min-h-screen">
+        <Sidebar />
+        <main className="pl-0 lg:pl-56">
+          <MobileHeader />
+          <header className="hidden lg:flex sticky top-0 z-30 h-16 items-center justify-end border-b border-primary/20 bg-background/95 px-6 backdrop-blur shadow-[0_0_30px_hsl(180_100%_50%_/_0.04)]" />
+          <div className="p-4 sm:p-6">{children}</div>
+        </main>
+      </div>
+    </MobileNavProvider>
   );
 }

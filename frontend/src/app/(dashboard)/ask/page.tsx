@@ -67,14 +67,14 @@ export default function AskPage() {
         </p>
       </header>
 
-      <form onSubmit={submit} className="flex gap-2">
+      <form onSubmit={submit} className="flex flex-col gap-2 sm:flex-row">
         <input
           type="text"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask a question..."
           disabled={loading}
-          className="flex-1 border border-primary/30 bg-background px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
+          className="min-w-0 flex-1 border border-primary/30 bg-background px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
         />
         <button
           type="submit"
@@ -121,7 +121,7 @@ export default function AskPage() {
                       borderRadius: 0,
                       fontFamily: "JetBrains Mono, monospace",
                     }}
-                    labelFormatter={formatChartDate}
+                    labelFormatter={(label) => formatChartDate(String(label ?? ""))}
                     formatter={(v: number) => v != null ? [`$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
                   />
                   <Bar dataKey="revenue" fill={CHART_COLOR} name="Revenue" radius={[0, 0, 0, 0]} />
@@ -148,7 +148,7 @@ export default function AskPage() {
                       borderRadius: 0,
                       fontFamily: "JetBrains Mono, monospace",
                     }}
-                    labelFormatter={formatChartDate}
+                    labelFormatter={(label) => formatChartDate(String(label ?? ""))}
                   />
                   <Line type="monotone" dataKey="orders" stroke={CHART_COLOR} dot={false} strokeWidth={2} />
                 </LineChart>

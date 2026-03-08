@@ -60,7 +60,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right: Form */}
-      <div className="flex w-full flex-col justify-center px-8 py-12 lg:w-1/2 lg:px-16">
+      <div className="flex w-full flex-col justify-center px-4 py-8 sm:px-8 sm:py-12 lg:w-1/2 lg:px-16">
         <div className="mx-auto w-full max-w-sm">
           <p className="font-mono text-xs uppercase tracking-widest text-primary/80 lg:hidden">
             PulseMetrics

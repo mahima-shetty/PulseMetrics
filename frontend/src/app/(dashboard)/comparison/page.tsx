@@ -189,40 +189,52 @@ export default function ComparisonPage() {
               <GitCompare className="h-4 w-4" />
               Side-by-side (each metric has its own scale)
             </div>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
               <div>
                 <p className="mb-2 font-mono text-xs text-muted-foreground">Revenue</p>
-                <ResponsiveContainer width="100%" height={160}>
+                <ResponsiveContainer width="100%" height={140}>
                   <BarChart data={revenueData} layout="vertical" margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={CHART_STYLE.grid.stroke} horizontal={false} />
                     <XAxis type="number" tickFormatter={(v) => formatCurrencyFull(v)} tick={CHART_STYLE.tick} />
                     <YAxis type="category" dataKey="period" width={40} tick={CHART_STYLE.tick} />
                     <Tooltip contentStyle={CHART_STYLE.tooltip} formatter={(v: number) => [formatCurrencyFull(v), null]} />
-                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false} />
+                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false}>
+                      {revenueData.map((entry, i) => (
+                        <Cell key={i} fill={entry.fill} />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
               <div>
                 <p className="mb-2 font-mono text-xs text-muted-foreground">Orders</p>
-                <ResponsiveContainer width="100%" height={160}>
+                <ResponsiveContainer width="100%" height={140}>
                   <BarChart data={ordersData} layout="vertical" margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={CHART_STYLE.grid.stroke} horizontal={false} />
                     <XAxis type="number" tick={CHART_STYLE.tick} />
                     <YAxis type="category" dataKey="period" width={40} tick={CHART_STYLE.tick} />
                     <Tooltip contentStyle={CHART_STYLE.tooltip} />
-                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false} />
+                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false}>
+                      {ordersData.map((entry, i) => (
+                        <Cell key={i} fill={entry.fill} />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
               <div>
                 <p className="mb-2 font-mono text-xs text-muted-foreground">New customers</p>
-                <ResponsiveContainer width="100%" height={160}>
+                <ResponsiveContainer width="100%" height={140}>
                   <BarChart data={customersData} layout="vertical" margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke={CHART_STYLE.grid.stroke} horizontal={false} />
                     <XAxis type="number" tick={CHART_STYLE.tick} allowDecimals={false} />
                     <YAxis type="category" dataKey="period" width={40} tick={CHART_STYLE.tick} />
                     <Tooltip contentStyle={CHART_STYLE.tooltip} />
-                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false} />
+                    <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false}>
+                      {customersData.map((entry, i) => (
+                        <Cell key={i} fill={entry.fill} />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>

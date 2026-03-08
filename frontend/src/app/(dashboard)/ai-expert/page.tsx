@@ -45,13 +45,13 @@ export default function AIExpertPage() {
       </header>
 
       <form onSubmit={submit} className="space-y-4">
-        <textarea
+          <textarea
           value={issue}
           onChange={(e) => setIssue(e.target.value)}
           placeholder="E.g. My revenue is declining and I don't know why. Customers seem to be churning..."
           disabled={loading}
           rows={4}
-          className="w-full border border-primary/30 bg-background px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60 resize-y"
+          className="min-h-[120px] min-w-0 w-full border border-primary/30 bg-background px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60 resize-y"
         />
         <button
           type="submit"

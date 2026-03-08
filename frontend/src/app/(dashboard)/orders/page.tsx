@@ -130,12 +130,12 @@ export default function OrdersPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-primary/60">Data</p>
-          <h1 className="font-display text-2xl font-bold text-primary">Orders</h1>
+          <h1 className="font-display text-xl font-bold text-primary sm:text-2xl">Orders</h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Dialog open={uploadOpen} onOpenChange={setUploadOpen}>
             <DialogTrigger asChild>
               <Button variant="outline">
@@ -243,9 +243,9 @@ export default function OrdersPage() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <CardTitle>Filters</CardTitle>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-2">
               <Label>From</Label>
               <Input
@@ -283,6 +283,7 @@ export default function OrdersPage() {
             <div className="py-8 text-center text-muted-foreground">No orders yet</div>
           ) : (
             <>
+              <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -311,7 +312,8 @@ export default function OrdersPage() {
                   ))}
                 </TableBody>
               </Table>
-              <div className="mt-4 flex items-center justify-between">
+              </div>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-muted-foreground">
                   Showing {(page - 1) * 20 + 1} - {Math.min(page * 20, total)} of {total}
                 </p>

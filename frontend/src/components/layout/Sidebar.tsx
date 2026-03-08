@@ -19,10 +19,12 @@ import {
   MessageSquare,
   Bot,
   GitCompare,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useMobileNav } from "@/contexts/MobileNavContext";
 
 const nav = [
   { href: "/dashboard", label: "DASHBOARD", icon: LayoutDashboard },
@@ -42,22 +44,18 @@ const nav = [
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 
-export function Sidebar() {
+function NavContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
   const { logout } = useAuth();
 
   return (
-    <aside className="fixed left-0 top-0 z-40 flex h-screen w-56 flex-col border-r border-primary/20 bg-background">
-      <div className="flex h-16 items-center border-b border-primary/20 px-6">
-        <Link href="/dashboard" className="font-display text-lg font-bold tracking-wider text-primary">
-          PULSEMETRICS
-        </Link>
-      </div>
-      <nav className="flex-1 space-y-0.5 p-4">
+    <>
+      <nav className="flex-1 space-y-0.5 overflow-y-auto p-4">
         {nav.map((item) => (
           <Link
             key={item.href}
             href={item.href}
+            onClick={onLinkClick}
             className={cn(
               "flex items-center gap-3 border-l-2 px-4 py-3 font-mono text-xs tracking-wider transition-all",
               pathname === item.href
@@ -66,7 +64,7 @@ export function Sidebar() {
             )}
           >
             <item.icon className="h-4 w-4 shrink-0" />
-            {item.label}
+            <span className="truncate">{item.label}</span>
           </Link>
         ))}
       </nav>
@@ -76,10 +74,71 @@ export function Sidebar() {
           className="w-full justify-start font-mono text-xs text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
           onClick={logout}
         >
-          <LogOut className="mr-3 h-4 w-4" />
+          <LogOut className="mr-3 h-4 w-4 shrink-0" />
           LOGOUT
         </Button>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function Sidebar() {
+  const { sidebarOpen, setSidebarOpen } = useMobileNav();
+
+  return (
+    <>
+      {/* Desktop sidebar - hidden on mobile */}
+      <aside
+        className={cn(
+          "fixed left-0 top-0 z-40 hidden h-screen w-56 flex-col border-r border-primary/20 bg-background",
+          "lg:flex"
+        )}
+      >
+        <div className="flex h-16 shrink-0 items-center border-b border-primary/20 px-4 lg:px-6">
+          <Link href="/dashboard" className="font-display text-lg font-bold tracking-wider text-primary">
+            PULSEMETRICS
+          </Link>
+        </div>
+        <NavContent />
+      </aside>
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile sidebar drawer */}
+      <aside
+        className={cn(
+          "fixed left-0 top-0 z-50 flex h-screen w-72 max-w-[85vw] flex-col border-r border-primary/20 bg-background shadow-xl transition-transform duration-200 ease-out",
+          "lg:hidden",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-primary/20 px-4">
+          <Link
+            href="/dashboard"
+            className="font-display text-base font-bold tracking-wider text-primary"
+            onClick={() => setSidebarOpen(false)}
+          >
+            PULSEMETRICS
+          </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 shrink-0"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+        <NavContent onLinkClick={() => setSidebarOpen(false)} />
+      </aside>
+    </>
   );
 }

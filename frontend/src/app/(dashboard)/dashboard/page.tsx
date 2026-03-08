@@ -191,7 +191,7 @@ export default function DashboardPage() {
           <div className="hud-corner hud-corner-bl" />
           <div className="hud-corner hud-corner-br" />
           <p className="font-mono text-xs uppercase tracking-widest text-primary/60">Total Revenue</p>
-          <p className="font-mono mt-2 text-4xl font-bold tabular-nums text-primary md:text-5xl lg:text-6xl">
+          <p className="font-mono mt-2 text-3xl font-bold tabular-nums text-primary sm:text-4xl md:text-5xl lg:text-6xl">
             ${kpis?.total_revenue?.toLocaleString() ?? 0}
           </p>
           <div className="mt-3 flex gap-6 font-mono text-sm">

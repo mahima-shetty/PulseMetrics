@@ -20,9 +20,10 @@ export function formatCurrency(value: number): string {
 }
 
 export function formatCurrencyFull(value: number): string {
-  return value?.toLocaleString(undefined, {
+  if (value == null || !Number.isFinite(value)) return "$0";
+  return value.toLocaleString(undefined, {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
-  }) ?? "$0";
+  });
 }

@@ -318,6 +318,19 @@ export const atRiskApi = {
     }>("/at-risk?days=" + days),
 };
 
+// Ask Data (natural language)
+export const askApi = {
+  ask: (question: string) =>
+    apiFetch<{
+      answer: string;
+      data?: unknown;
+      chart_type?: string | null;
+    }>("/ask", {
+      method: "POST",
+      body: JSON.stringify({ question }),
+    }),
+};
+
 // Segments (RFM + K-means)
 export const segmentsApi = {
   list: () =>

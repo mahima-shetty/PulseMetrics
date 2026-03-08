@@ -96,3 +96,56 @@ Write in a professional, actionable tone. Use specific numbers."""
         return response.choices[0].message.content or ""
     except Exception as e:
         return f"# Error\n\nFailed to generate report: {str(e)}"
+
+
+def extract_ask_intent(question: str) -> str | None:
+    """
+    Map natural language question to a whitelisted intent + params.
+    Returns JSON string like '{"intent": "kpis"}' or '{"intent": "revenue_chart", "days": 30}'.
+    Returns None if LLM not configured or on error.
+    """
+    client = get_client()
+    if not client:
+        return None
+
+    settings = get_settings()
+    prompt = f"""You are an intent classifier for a business dashboard. Map the user's question to exactly one of these intents. Return ONLY valid JSON, no other text.
+
+Intents:
+- kpis: total revenue, orders, customers, growth, summary, overview, "how much", "how many"
+- revenue_chart: revenue/sales over time, last N days revenue, revenue trend (params: days, default 30)
+- orders_chart: orders over time, order trend, last N days orders (params: days, default 14)
+- top_products: best products, top sellers, products by revenue (params: limit, default 5)
+- recent_orders: list orders, show orders, latest orders, my orders
+- recent_customers: list customers, show customers, latest customers, new customers, who are my customers
+- segments: customer segments, RFM, segment
+- at_risk: at risk, churn, inactive customers (params: days, default 60)
+- alerts: alerts, warnings, issues
+- recommendations: recommendations, also bought, bundle, cross-sell
+- ltv: LTV, lifetime value, predicted value (params: limit, default 10)
+- anomalies: anomalies, unusual, outliers (params: days, default 30)
+
+Examples:
+- "What's my total revenue?" -> {{"intent": "kpis"}}
+- "Revenue last 30 days" -> {{"intent": "revenue_chart", "days": 30}}
+- "Top 5 products" -> {{"intent": "top_products", "limit": 5}}
+- "List my orders" -> {{"intent": "recent_orders"}}
+- "Customer segments" -> {{"intent": "segments"}}
+
+User question: {question}"""
+
+    try:
+        response = client.chat.completions.create(
+            model=settings.llm_model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+        content = (response.choices[0].message.content or "").strip()
+        # Extract JSON if wrapped in markdown code block
+        if "```json" in content:
+            content = content.split("```json")[1].split("```")[0].strip()
+        elif "```" in content:
+            content = content.split("```")[1].split("```")[0].strip()
+        return content if content else None
+    except Exception:
+        return None

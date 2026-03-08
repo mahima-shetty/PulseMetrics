@@ -1,5 +1,21 @@
+from urllib.parse import urlparse, urlunparse, parse_qs, urlencode
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+
+
+def _ensure_ssl_mode(url: str, mode: str = "disable") -> str:
+    """Append sslmode=disable for Railway Postgres to avoid SSL handshake failures."""
+    import os
+    is_railway = os.environ.get("RAILWAY_ENVIRONMENT") or "railway" in url.lower() or "rlwy.net" in url.lower()
+    if not is_railway:
+        return url
+    parsed = urlparse(url)
+    qs = parse_qs(parsed.query)
+    if "sslmode" in qs:
+        return url
+    qs["sslmode"] = [mode]
+    new_query = urlencode(qs, doseq=True)
+    return urlunparse(parsed._replace(query=new_query))
 
 
 class Settings(BaseSettings):
@@ -39,6 +55,10 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+
+    def model_post_init(self, __context) -> None:
+        # Ensure Railway Postgres URLs use sslmode=disable for internal connections
+        object.__setattr__(self, "DATABASE_URL", _ensure_ssl_mode(self.DATABASE_URL))
 
 
 @lru_cache

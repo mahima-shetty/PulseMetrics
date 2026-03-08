@@ -331,6 +331,18 @@ export const askApi = {
     }),
 };
 
+// Ask AI Expert (RAG with business docs)
+export const aiExpertApi = {
+  ask: (issue: string) =>
+    apiFetch<{
+      answer: string;
+      sources: string[];
+    }>("/ai-expert/ask", {
+      method: "POST",
+      body: JSON.stringify({ issue }),
+    }),
+};
+
 // Segments (RFM + K-means)
 export const segmentsApi = {
   list: () =>

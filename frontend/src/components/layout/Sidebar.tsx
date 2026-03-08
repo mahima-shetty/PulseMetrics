@@ -17,6 +17,7 @@ import {
   Banknote,
   Bell,
   MessageSquare,
+  Bot,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ const nav = [
   { href: "/ltv", label: "LTV", icon: Banknote },
   { href: "/alerts", label: "ALERTS", icon: Bell },
   { href: "/ask", label: "ASK DATA", icon: MessageSquare },
+  { href: "/ai-expert", label: "ASK AI EXPERT", icon: Bot },
   { href: "/ai-insights", label: "AI INSIGHTS", icon: Sparkles },
 ];
 

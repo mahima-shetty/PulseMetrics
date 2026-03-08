@@ -18,6 +18,7 @@ import {
   Bell,
   MessageSquare,
   Bot,
+  GitCompare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ const nav = [
   { href: "/customers", label: "CUSTOMERS", icon: Users },
   { href: "/orders", label: "ORDERS", icon: ShoppingCart },
   { href: "/predictions", label: "PREDICTIONS", icon: TrendingUp },
+  { href: "/comparison", label: "PERIOD COMPARE", icon: GitCompare },
   { href: "/segments", label: "SEGMENTS", icon: PieChart },
   { href: "/at-risk", label: "CHURN RISK", icon: AlertTriangle },
   { href: "/anomalies", label: "ANOMALIES", icon: Activity },

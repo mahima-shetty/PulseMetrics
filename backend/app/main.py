@@ -21,6 +21,7 @@ from app.api.ltv import router as ltv_router
 from app.api.alerts import router as alerts_router
 from app.api.ask import router as ask_router
 from app.api.ai_expert import router as ai_expert_router
+from app.api.comparison import router as comparison_router
 
 app = FastAPI(
     title="AI Founder Dashboard API",
@@ -56,6 +57,7 @@ app.include_router(ltv_router)
 app.include_router(alerts_router)
 app.include_router(ask_router)
 app.include_router(ai_expert_router)
+app.include_router(comparison_router)
 
 
 ALLOWED_ORIGINS = {"http://localhost:3000", "http://127.0.0.1:3000"}

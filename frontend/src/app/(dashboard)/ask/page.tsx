@@ -14,6 +14,7 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import { formatChartDate, formatCurrency } from "@/lib/chart-utils";
 
 const CHART_COLOR = "#00fff5";
 
@@ -111,16 +112,19 @@ export default function AskPage() {
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 100% 50% / 0.1)" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
+                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={formatChartDate} />
+                  <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={(v) => formatCurrency(v)} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(240 12% 8%)",
                       border: "1px solid hsl(180 100% 50% / 0.3)",
                       borderRadius: 0,
+                      fontFamily: "JetBrains Mono, monospace",
                     }}
+                    labelFormatter={formatChartDate}
+                    formatter={(v: number) => v != null ? [`$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
                   />
-                  <Bar dataKey="revenue" fill={CHART_COLOR} name="Revenue" />
+                  <Bar dataKey="revenue" fill={CHART_COLOR} name="Revenue" radius={[0, 0, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -135,14 +139,16 @@ export default function AskPage() {
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 100% 50% / 0.1)" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
+                  <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={formatChartDate} />
+                  <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(240 12% 8%)",
                       border: "1px solid hsl(180 100% 50% / 0.3)",
                       borderRadius: 0,
+                      fontFamily: "JetBrains Mono, monospace",
                     }}
+                    labelFormatter={formatChartDate}
                   />
                   <Line type="monotone" dataKey="orders" stroke={CHART_COLOR} dot={false} strokeWidth={2} />
                 </LineChart>

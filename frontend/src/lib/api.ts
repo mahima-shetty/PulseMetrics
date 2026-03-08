@@ -343,6 +343,21 @@ export const aiExpertApi = {
     }),
 };
 
+// Period Comparison
+export const comparisonApi = {
+  get: (mode: "month" | "week" = "month") =>
+    apiFetch<{
+      mode: string;
+      period_label: string;
+      this_period_start: string;
+      prev_period_start: string;
+      prev_period_end: string;
+      revenue: { this: number; prev: number; change_pct: number };
+      orders: { this: number; prev: number; change_pct: number };
+      new_customers: { this: number; prev: number; change_pct: number };
+    }>("/comparison?mode=" + mode),
+};
+
 // Segments (RFM + K-means)
 export const segmentsApi = {
   list: () =>

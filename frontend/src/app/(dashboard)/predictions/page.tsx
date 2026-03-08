@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { formatChartDate, formatCurrency } from "@/lib/chart-utils";
 
 const COLORS = ["#00fff5", "#ff00ff", "#b946ff"];
 
@@ -187,14 +188,17 @@ export default function PredictionsPage() {
           <ResponsiveContainer width="100%" height={320}>
             <LineChart data={revenueChartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 100% 50% / 0.1)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={formatChartDate} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={(v) => formatCurrency(v)} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "hsl(240 12% 8%)",
                   border: "1px solid hsl(180 100% 50% / 0.3)",
                   borderRadius: 0,
+                  fontFamily: "JetBrains Mono, monospace",
                 }}
+                labelFormatter={formatChartDate}
+                formatter={(v: number) => v != null ? [`$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
               />
               <Legend />
               <Line type="monotone" dataKey="revenue" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />
@@ -227,14 +231,16 @@ export default function PredictionsPage() {
           <ResponsiveContainer width="100%" height={320}>
             <LineChart data={ordersChartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 100% 50% / 0.1)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)" }} />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={formatChartDate} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(180 50% 60%)", fontFamily: "JetBrains Mono, monospace" }} tickFormatter={(v) => Math.round(v).toString()} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "hsl(240 12% 8%)",
                   border: "1px solid hsl(180 100% 50% / 0.3)",
                   borderRadius: 0,
+                  fontFamily: "JetBrains Mono, monospace",
                 }}
+                labelFormatter={formatChartDate}
               />
               <Legend />
               <Line type="monotone" dataKey="order_count" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />

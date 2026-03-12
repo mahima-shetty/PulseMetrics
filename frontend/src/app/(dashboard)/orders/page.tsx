@@ -75,7 +75,7 @@ export default function OrdersPage() {
 
   useEffect(() => {
     load();
-  }, [page, dateFrom, dateTo]);
+  }, [page, dateFrom, dateTo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     loadCustomers();

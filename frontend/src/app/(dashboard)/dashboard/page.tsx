@@ -1,14 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  DollarSign,
-  ShoppingCart,
-  Users,
-  TrendingUp,
-  Sparkles,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShoppingCart, Users, Sparkles } from "lucide-react";
+import { CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -240,8 +234,8 @@ export default function DashboardPage() {
                     borderRadius: 0,
                     fontFamily: "JetBrains Mono, monospace",
                   }}
-                  labelFormatter={formatChartDate}
-                  formatter={(value: number) => value != null ? [`$${value?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
+                  labelFormatter={(label) => formatChartDate(String(label ?? ""))}
+                  formatter={(value) => value != null && typeof value === "number" ? [`$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
                 />
                 <Legend />
                 <Line type="monotone" dataKey="revenue" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />
@@ -284,7 +278,7 @@ export default function DashboardPage() {
                     borderRadius: 0,
                     fontFamily: "JetBrains Mono, monospace",
                   }}
-                  labelFormatter={formatChartDate}
+                  labelFormatter={(label) => formatChartDate(String(label ?? ""))}
                 />
                 <Bar dataKey="orders" fill={COLORS[0]} name="Orders" radius={[0, 0, 0, 0]} />
               </BarChart>
@@ -318,7 +312,7 @@ export default function DashboardPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(v: number) => [v != null ? `$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : "$0", null]}
+                  formatter={(v) => [v != null && typeof v === "number" ? `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : "$0", null]}
                   contentStyle={{
                     backgroundColor: "hsl(240 12% 8%)",
                     border: "1px solid hsl(180 100% 50% / 0.3)",

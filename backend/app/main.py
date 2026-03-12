@@ -22,6 +22,11 @@ from app.api.alerts import router as alerts_router
 from app.api.ask import router as ask_router
 from app.api.ai_expert import router as ai_expert_router
 from app.api.comparison import router as comparison_router
+from app.core.config import get_settings
+
+_settings = get_settings()
+_cors_origins_list = [o.strip() for o in _settings.CORS_ORIGINS.split(",") if o.strip()]
+ALLOWED_ORIGINS = set(_cors_origins_list) or {"http://localhost:3000", "http://127.0.0.1:3000"}
 
 app = FastAPI(
     title="AI Founder Dashboard API",
@@ -29,10 +34,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS - must be first middleware added (outermost). Explicit dev origins.
+# CORS - must be first middleware added (outermost). Origins from CORS_ORIGINS env.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=list(ALLOWED_ORIGINS),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
@@ -60,13 +65,10 @@ app.include_router(ai_expert_router)
 app.include_router(comparison_router)
 
 
-ALLOWED_ORIGINS = {"http://localhost:3000", "http://127.0.0.1:3000"}
-
-
 def _cors_headers(request: Request) -> dict:
     origin = request.headers.get("origin", "http://localhost:3000")
     if origin not in ALLOWED_ORIGINS:
-        origin = "http://localhost:3000"
+        origin = next(iter(ALLOWED_ORIGINS), "http://localhost:3000")
     return {"Access-Control-Allow-Origin": origin, "Access-Control-Allow-Credentials": "true"}
 
 

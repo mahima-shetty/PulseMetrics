@@ -156,7 +156,7 @@ export default function SegmentsPage() {
 
           {/* Detailed tables per segment */}
           <div className="space-y-6">
-            {data?.segments?.map((segment, i) => (
+            {data?.segments?.map((segment) => (
               <div
                 key={segment.name}
                 className="relative overflow-hidden rounded-none border border-primary/20 bg-card/30 p-6 hud-panel"

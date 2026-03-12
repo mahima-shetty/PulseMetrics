@@ -40,7 +40,7 @@ export default function ComparisonPage() {
 
   useEffect(() => {
     load();
-  }, [mode]);
+  }, [mode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const periodLabel = mode === "month" ? "This month vs last month" : "This week vs last week";
 
@@ -197,7 +197,7 @@ export default function ComparisonPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke={CHART_STYLE.grid.stroke} horizontal={false} />
                     <XAxis type="number" tickFormatter={(v) => formatCurrencyFull(v)} tick={CHART_STYLE.tick} />
                     <YAxis type="category" dataKey="period" width={40} tick={CHART_STYLE.tick} />
-                    <Tooltip contentStyle={CHART_STYLE.tooltip} formatter={(v: number) => [formatCurrencyFull(v), null]} />
+                    <Tooltip contentStyle={CHART_STYLE.tooltip} formatter={(v) => [v != null && typeof v === "number" ? formatCurrencyFull(v) : "", null]} />
                     <Bar dataKey="value" radius={[0, 0, 0, 0]} isAnimationActive={false}>
                       {revenueData.map((entry, i) => (
                         <Cell key={i} fill={entry.fill} />

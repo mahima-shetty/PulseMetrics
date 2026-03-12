@@ -38,7 +38,7 @@ export default function AtRiskPage() {
 
   useEffect(() => {
     load();
-  }, [days]);
+  }, [days]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (

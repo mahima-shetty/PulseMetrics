@@ -52,7 +52,7 @@ export default function DemandPage() {
 
   useEffect(() => {
     load();
-  }, [days]);
+  }, [days]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentProduct = data?.products?.find((p) => p.product === selectedProduct) ?? data?.products?.[0];
   const chartData = currentProduct
@@ -187,7 +187,7 @@ export default function DemandPage() {
                       borderRadius: 0,
                       fontFamily: "JetBrains Mono, monospace",
                     }}
-                    labelFormatter={formatChartDate}
+                    labelFormatter={(label) => formatChartDate(String(label ?? ""))}
                   />
                   <Legend />
                   <Line type="monotone" dataKey="quantity" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />

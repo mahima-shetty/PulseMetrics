@@ -140,7 +140,7 @@ export default function LTVPage() {
                       border: "1px solid hsl(180 100% 50% / 0.3)",
                       borderRadius: 0,
                     }}
-                    formatter={(value: number, name: string) => [`$${Number(value).toLocaleString()}`, name]}
+                    formatter={(value, name) => [value != null ? `$${Number(value).toLocaleString()}` : "", name]}
                     labelFormatter={(_, payload) => payload?.[0]?.payload?.fullName ?? ""}
                   />
                   <Legend />

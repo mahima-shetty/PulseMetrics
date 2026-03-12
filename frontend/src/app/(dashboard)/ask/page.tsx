@@ -122,7 +122,7 @@ export default function AskPage() {
                       fontFamily: "JetBrains Mono, monospace",
                     }}
                     labelFormatter={(label) => formatChartDate(String(label ?? ""))}
-                    formatter={(v: number) => v != null ? [`$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
+                    formatter={(v) => (v != null && typeof v === "number") ? [`$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
                   />
                   <Bar dataKey="revenue" fill={CHART_COLOR} name="Revenue" radius={[0, 0, 0, 0]} />
                 </BarChart>
@@ -193,7 +193,7 @@ export default function AskPage() {
             </div>
           )}
 
-          {response.data && typeof response.data === "object" && !Array.isArray(response.data) && (
+          {response.data && typeof response.data === "object" && !Array.isArray(response.data) ? (
             <div className="relative overflow-hidden rounded-none border border-primary/20 bg-card/30 p-6 hud-panel">
               <div className="hud-corner hud-corner-tl" />
               <div className="mb-4 font-mono text-xs uppercase tracking-widest text-primary/80">
@@ -203,7 +203,7 @@ export default function AskPage() {
                 {JSON.stringify(response.data, null, 2)}
               </pre>
             </div>
-          )}
+          ) : null}
         </div>
       )}
 

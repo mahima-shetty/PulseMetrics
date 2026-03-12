@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { customersApi } from "@/lib/api";
 
-interface CustomerDetail extends Awaited<ReturnType<typeof customersApi.get>> {}
+type CustomerDetail = Awaited<ReturnType<typeof customersApi.get>>;
 
 export default function CustomerDetailPage() {
   const params = useParams();

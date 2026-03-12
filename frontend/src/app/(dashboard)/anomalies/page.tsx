@@ -33,7 +33,7 @@ export default function AnomaliesPage() {
 
   useEffect(() => {
     load();
-  }, [days]);
+  }, [days]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (

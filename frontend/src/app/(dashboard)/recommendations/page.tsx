@@ -30,7 +30,7 @@ export default function RecommendationsPage() {
 
   useEffect(() => {
     load();
-  }, [minCustomers]);
+  }, [minCustomers]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (

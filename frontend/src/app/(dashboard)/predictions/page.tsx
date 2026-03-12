@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TrendingUp, Cpu, DollarSign, ShoppingCart } from "lucide-react";
+import { Cpu, DollarSign, ShoppingCart } from "lucide-react";
 import { predictionsApi } from "@/lib/api";
 import {
   LineChart,
@@ -45,7 +45,7 @@ export default function PredictionsPage() {
 
   useEffect(() => {
     load();
-  }, [days]);
+  }, [days]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const revenueChartData = data
     ? [
@@ -197,8 +197,8 @@ export default function PredictionsPage() {
                   borderRadius: 0,
                   fontFamily: "JetBrains Mono, monospace",
                 }}
-                labelFormatter={formatChartDate}
-                formatter={(v: number) => v != null ? [`$${v?.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
+                labelFormatter={(label) => formatChartDate(String(label ?? ""))}
+                formatter={(v) => v != null && typeof v === "number" ? [`$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, null] : [null, null]}
               />
               <Legend />
               <Line type="monotone" dataKey="revenue" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />
@@ -240,7 +240,7 @@ export default function PredictionsPage() {
                   borderRadius: 0,
                   fontFamily: "JetBrains Mono, monospace",
                 }}
-                labelFormatter={formatChartDate}
+                labelFormatter={(label) => formatChartDate(String(label ?? ""))}
               />
               <Legend />
               <Line type="monotone" dataKey="order_count" stroke={COLORS[0]} name="Actual" dot={false} strokeWidth={2} />

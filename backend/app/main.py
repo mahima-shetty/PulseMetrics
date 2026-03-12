@@ -34,10 +34,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS - must be first middleware added (outermost). Origins from CORS_ORIGINS env.
+# CORS: explicit origins + regex for any Railway frontend (*.up.railway.app)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(ALLOWED_ORIGINS),
+    allow_origin_regex=r"https://.*\.up\.railway\.app",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
